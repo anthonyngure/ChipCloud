@@ -144,7 +144,7 @@ then add the dependency to your project build.gradle:
 
 ```groovy
 dependencies {
-    implementation 'com.github.anthonyngure:ChipCloud:2.2.3'
+    implementation 'com.github.anthonyngure:ChipCloud:2.2.4'
 }
 ```
 You can find the latest version in the releases tab above: https://github.com/anthonyngure/ChipCloud/releases

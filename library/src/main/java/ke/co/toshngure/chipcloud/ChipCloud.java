@@ -30,7 +30,7 @@ public class ChipCloud extends FlowLayout implements ChipListener {
     public ChipCloud(Context context) {
         super(context);
         this.context = context;
-        chipHeight = getResources().getDimensionPixelSize(R.dimen.material_chip_height);
+        setChipHeight(getResources().getDimensionPixelSize(R.dimen.material_chip_height));
     }
 
     public ChipCloud(Context context, AttributeSet attrs) {
@@ -194,6 +194,10 @@ public class ChipCloud extends FlowLayout implements ChipListener {
         }
     }
 
+    private void setChipHeight(int chipHeight) {
+        this.chipHeight = chipHeight;
+    }
+
     public void addChip(String label) {
         Chip chip = new Chip.ChipBuilder().index(getChildCount())
                 .label(label)
@@ -289,6 +293,7 @@ public class ChipCloud extends FlowLayout implements ChipListener {
         private Typeface typeface;
         private Boolean allCaps = null;
         private int textSize = -1;
+        private int chipHeight = -1;
         private int minHorizontalSpacing = -1;
         private int verticalSpacing = -1;
 
@@ -360,6 +365,14 @@ public class ChipCloud extends FlowLayout implements ChipListener {
             return this;
         }
 
+        /**
+         * @param chipHeight value in pixels as obtained from @{@link android.content.res.Resources#getDimensionPixelSize(int)}
+         */
+        public Configure chipHeight(int chipHeight) {
+            this.chipHeight = chipHeight;
+            return this;
+        }
+
         public Configure allCaps(boolean isAllCaps) {
             this.allCaps = isAllCaps;
             return this;
@@ -381,6 +394,7 @@ public class ChipCloud extends FlowLayout implements ChipListener {
             if (gravity != null) chipCloud.setGravity(gravity);
             if (typeface != null) chipCloud.setTypeface(typeface);
             if (textSize != -1) chipCloud.setTextSize(textSize);
+            if (chipHeight != -1) chipCloud.setChipHeight(chipHeight);
             if (allCaps != null) chipCloud.setAllCaps(allCaps);
             if (selectedColor != -1) chipCloud.setSelectedColor(selectedColor);
             if (selectedFontColor != -1) chipCloud.setSelectedFontColor(selectedFontColor);

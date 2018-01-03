@@ -1,4 +1,4 @@
-package com.adroitandroid.chipcloud;
+package ke.co.toshngure.chipcloud;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -15,10 +15,6 @@ public abstract class FlowLayout extends ViewGroup {
 
     private int lineHeight;
     private LayoutProcessor layoutProcessor = new LayoutProcessor();
-
-    public enum Gravity {
-        LEFT, RIGHT, CENTER, STAGGERED
-    }
 
     public FlowLayout(Context context) {
         super(context);
@@ -103,12 +99,16 @@ public abstract class FlowLayout extends ViewGroup {
 
     protected abstract Gravity getGravity();
 
+    public enum Gravity {
+        LEFT, RIGHT, CENTER, STAGGERED
+    }
+
     private class LayoutProcessor {
 
-        private int rowY;
         private final List<View> viewsInCurrentRow;
         private final List<Integer> viewWidths;
         private final List<Integer> viewHeights;
+        private int rowY;
         private int width;
 
         private LayoutProcessor() {

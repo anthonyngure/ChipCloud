@@ -22,8 +22,9 @@
         <attr name="typeface" format="string" />
         <attr name="allCaps" format="boolean" />
         <attr name="textSize" format="dimension" />
-        <attr name="labels" format="reference"/>
+        <attr name="labels" format="reference" />
         <attr name="minHorizontalSpacing" format="dimension" />
         <attr name="verticalSpacing" format="dimension" />
+        <attr name="chipHeight" format="dimension" />
     </declare-styleable>
 </resources>

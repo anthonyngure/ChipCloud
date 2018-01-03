@@ -1,4 +1,4 @@
-package com.adroitandroid.chipcloud;
+package ke.co.toshngure.chipcloud;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
@@ -11,6 +11,8 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import com.adroitandroid.chipcloud.R;
 
 public class Chip extends android.support.v7.widget.AppCompatTextView implements View.OnClickListener {
 
@@ -25,10 +27,6 @@ public class Chip extends android.support.v7.widget.AppCompatTextView implements
     private boolean isLocked = false;
     private ChipCloud.Mode mode;
 
-    public void setChipListener(ChipListener listener) {
-        this.listener = listener;
-    }
-
     public Chip(Context context) {
         super(context);
         init();
@@ -42,6 +40,10 @@ public class Chip extends android.support.v7.widget.AppCompatTextView implements
     public Chip(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
+    }
+
+    public void setChipListener(ChipListener listener) {
+        this.listener = listener;
     }
 
     public void initChip(Context context, int index, String label, Typeface typeface, int textSizePx,

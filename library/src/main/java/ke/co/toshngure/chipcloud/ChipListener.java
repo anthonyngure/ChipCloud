@@ -1,4 +1,4 @@
-package com.adroitandroid.chipcloud;
+package ke.co.toshngure.chipcloud;
 
 public interface ChipListener {
     void chipSelected(int index);

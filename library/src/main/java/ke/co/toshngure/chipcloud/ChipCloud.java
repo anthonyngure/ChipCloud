@@ -1,15 +1,14 @@
-package com.adroitandroid.chipcloud;
+package ke.co.toshngure.chipcloud;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
-public class ChipCloud extends FlowLayout implements ChipListener {
+import com.adroitandroid.chipcloud.R;
 
-    public enum Mode {
-        SINGLE, MULTI, REQUIRED, NONE
-    }
+
+public class ChipCloud extends FlowLayout implements ChipListener {
 
     private Context context;
     private int chipHeight;
@@ -26,13 +25,12 @@ public class ChipCloud extends FlowLayout implements ChipListener {
     private int textSizePx = -1;
     private int verticalSpacing;
     private int minHorizontalSpacing;
-
     private ChipListener chipListener;
 
     public ChipCloud(Context context) {
         super(context);
         this.context = context;
-        init();
+        chipHeight = getResources().getDimensionPixelSize(R.dimen.material_chip_height);
     }
 
     public ChipCloud(Context context, AttributeSet attrs) {
@@ -53,7 +51,7 @@ public class ChipCloud extends FlowLayout implements ChipListener {
                 typeface = Typeface.createFromAsset(getContext().getAssets(), typefaceString);
             }
             textSizePx = a.getDimensionPixelSize(R.styleable.ChipCloud_textSize,
-                    getResources().getDimensionPixelSize(R.dimen.default_textsize));
+                    getResources().getDimensionPixelSize(R.dimen.material_chip_text_size));
             allCaps = a.getBoolean(R.styleable.ChipCloud_allCaps, false);
             int selectMode = a.getInt(R.styleable.ChipCloud_selectMode, 1);
             switch (selectMode) {
@@ -96,15 +94,21 @@ public class ChipCloud extends FlowLayout implements ChipListener {
                     getResources().getDimensionPixelSize(R.dimen.vertical_spacing));
             arrayReference = a.getResourceId(R.styleable.ChipCloud_labels, -1);
 
+            chipHeight = a.getDimensionPixelSize(R.styleable.ChipCloud_chipHeight,
+                    getResources().getDimensionPixelSize(R.dimen.material_chip_height));
+
         } finally {
             a.recycle();
         }
 
-        init();
 
         if (arrayReference != -1) {
             String[] labels = getResources().getStringArray(arrayReference);
             addChips(labels);
+        }
+
+        if (isInEditMode() && arrayReference == -1){
+            addChips(getResources().getStringArray(R.array.labels));
         }
     }
 
@@ -113,9 +117,17 @@ public class ChipCloud extends FlowLayout implements ChipListener {
         return minHorizontalSpacing;
     }
 
+    public void setMinimumHorizontalSpacing(int spacingInPx) {
+        this.minHorizontalSpacing = spacingInPx;
+    }
+
     @Override
     protected int getVerticalSpacing() {
         return verticalSpacing;
+    }
+
+    public void setVerticalSpacing(int spacingInPx) {
+        this.verticalSpacing = spacingInPx;
     }
 
     @Override
@@ -123,8 +135,8 @@ public class ChipCloud extends FlowLayout implements ChipListener {
         return gravity;
     }
 
-    private void init() {
-        chipHeight = getResources().getDimensionPixelSize(R.dimen.material_chip_height);
+    public void setGravity(Gravity gravity) {
+        this.gravity = gravity;
     }
 
     public void setSelectedColor(int selectedColor) {
@@ -160,10 +172,6 @@ public class ChipCloud extends FlowLayout implements ChipListener {
         }
     }
 
-    public void setGravity(Gravity gravity) {
-        this.gravity = gravity;
-    }
-
     public void setTypeface(Typeface typeface) {
         this.typeface = typeface;
     }
@@ -174,14 +182,6 @@ public class ChipCloud extends FlowLayout implements ChipListener {
 
     public void setAllCaps(boolean isAllCaps) {
         this.allCaps = isAllCaps;
-    }
-
-    public void setMinimumHorizontalSpacing(int spacingInPx) {
-        this.minHorizontalSpacing = spacingInPx;
-    }
-
-    public void setVerticalSpacing(int spacingInPx) {
-        this.verticalSpacing = spacingInPx;
     }
 
     public void setChipListener(ChipListener chipListener) {
@@ -267,6 +267,10 @@ public class ChipCloud extends FlowLayout implements ChipListener {
             return chip.isSelected();
         }
         return false;
+    }
+
+    public enum Mode {
+        SINGLE, MULTI, REQUIRED, NONE
     }
 
     //Apparently using the builder pattern to configure an object has been labelled a 'Bloch Builder'.
@@ -384,7 +388,8 @@ public class ChipCloud extends FlowLayout implements ChipListener {
             if (deselectedFontColor != -1) chipCloud.setUnselectedFontColor(deselectedFontColor);
             if (selectTransitionMS != -1) chipCloud.setSelectTransitionMS(selectTransitionMS);
             if (deselectTransitionMS != -1) chipCloud.setDeselectTransitionMS(deselectTransitionMS);
-            if (minHorizontalSpacing != -1) chipCloud.setMinimumHorizontalSpacing(minHorizontalSpacing);
+            if (minHorizontalSpacing != -1)
+                chipCloud.setMinimumHorizontalSpacing(minHorizontalSpacing);
             if (verticalSpacing != -1) chipCloud.setVerticalSpacing(verticalSpacing);
             chipCloud.setChipListener(chipListener);
             chipCloud.addChips(labels);

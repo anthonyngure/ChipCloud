@@ -1,4 +1,4 @@
-package eu.fiskur.chipcloud;
+package ke.co.toshngure.chipcloud;
 
 import org.junit.Test;
 

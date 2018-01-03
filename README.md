@@ -10,7 +10,7 @@ The ChipCloud library was originally a (very) quickly knocked up Android view fo
 
 Add to your Android layout xml:
 ```xml
-<com.adroitandroid.chipcloud.ChipCloud
+<ke.co.toshngure.chipcloud.ChipCloud
     android:id="@+id/chip_cloud"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
@@ -18,7 +18,7 @@ Add to your Android layout xml:
 
 Configure in xml:  
 ```xml
-<com.adroitandroid.chipcloud.ChipCloud
+<ke.co.toshngure.chipcloud.ChipCloud
     xmlns:chipcloud="http://schemas.android.com/apk/res-auto"
     android:id="@+id/chip_cloud"
     android:layout_width="match_parent"
@@ -35,7 +35,8 @@ Configure in xml:
     chipcloud:gravity="staggered"
     chipcloud:minHorizontalSpacing="32dp"
     chipcloud:verticalSpacing="16dp"
-    chipcloud:textSize="14sp"    
+    chipcloud:textSize="14sp"
+    chipcloud:chipHeight="22dp"
     chipcloud:typeface="RobotoSlab-Regular.ttf"/> <!--path relative to assets folder-->
 ```
 or in code:  
@@ -140,11 +141,10 @@ then add the dependency to your project build.gradle:
 
 ```groovy
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.github.adroitandroid:ChipCloud:2.2.1'
+    implementation 'com.github.anthonyngure:ChipCloud:2.2.3'
 }
 ```
-You can find the latest version in the releases tab above: https://github.com/adroitandroid/ChipCloud/releases
+You can find the latest version in the releases tab above: https://github.com/anthonyngure/ChipCloud/releases
 
 ## Licence
 
